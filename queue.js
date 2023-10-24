@@ -6,7 +6,7 @@ const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('./config.json').toString());
 const asyncRedis = require("async-redis");
 const client = asyncRedis.createClient(config.redis_port,config.redis_host);
-const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const FormData = require('form-data');
 const redis_client = asyncRedis.createClient(config.redis_port,config.redis_host); //creates a new client
 console.log("后台队列服务已经启动，随时等待新队列任务");
@@ -49,7 +49,7 @@ async function check_queue_hash(){
 					//执行单个队列single_queue_name
 					run_queue(single_queue_name,single_attribute);
 				}
-				
+
 			};
 		};
 	};
@@ -101,7 +101,7 @@ async function run_queue(queue_name,attribute){
 					await redis_client.hset(times_queue,url,0);
 					next_time = Date.parse(new Date()) + attribute.stepping_time*1000 ;
 					await redis_client.zadd(queue_name,next_time,url);
-					
+
 				}else{
 					var offset = execution_times*attribute.stepping_time*1000 ;
 					offset = offset > attribute.max_time_interval*1000 ? attribute.max_time_interval*1000 :offset ;

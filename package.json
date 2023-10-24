@@ -13,14 +13,13 @@
   "author": "star7th",
   "license": "apache2.0",
   "dependencies": {
-    "async-redis": "^1.1.7",
+    "async-redis": "^2.0.0",
     "body-parser": "^1.18.3",
     "connect-multiparty": "^2.2.0",
     "cookie-parser": "~1.4.3",
     "express": "^4.16.4",
-    "multer": "~1.2.0",
-    "node-fetch": "^2.6.1",
-    "redis": "~2.6.2",
-    "request": "^2.88.0"
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.2",
+    "redis": "^4.6.10"
   }
 }
