@@ -92,11 +92,8 @@ app.post('/api/allQueue', multipartMiddleware, function (req, res) {
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Credentials", "true");
 
-   var queue_name = config.redis_key_prefix + req.body.queue_name;
-   var type = req.body.type;
    var post_app_key = req.body.app_key;
    var post_app_token = req.body.app_token;
-   console.log(req.body);
    if (!check_token(post_app_key, post_app_token)) {
       res.send('{"error_code":1000,"message":"认证失败"}');
       return false;
@@ -125,7 +122,6 @@ app.post('/api/countQueue', multipartMiddleware, function (req, res) {
    res.header("Access-Control-Allow+-Credentials", "true");
 
    var queue_name = config.redis_key_prefix + req.body.queue_name;
-   var type = req.body.type;
    var post_app_key = req.body.app_key;
    var post_app_token = req.body.app_token;
    if (!check_token(post_app_key, post_app_token)) {
